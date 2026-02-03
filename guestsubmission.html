@@ -1,1 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be a Guest | Reflect and Rise Podcast</title>
+    <meta name="description" content="Share your story and insights on Reflect and Rise podcast.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ===== THEME VARIABLES (REUSABLE) ===== */
+        :root {
+            --midnight-navy: #050A14;
+            --deep-slate: #0D1621;
+            --soft-silver: #E8E8E8;
+            --warm-silver: #D4D4D4;
+            --accent-gold: #C9A870;
+            --muted-gold: #9B855A;
+            --text-primary: #E8E8E8;
+            --text-secondary: #B8B8B8;
+            --border-subtle: rgba(232, 232, 232, 0.12);
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Work Sans', sans-serif;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 3rem;
+            --spacing-xl: 5rem;
+            --max-width: 1200px;
+            --content-padding: 2rem;
+        }
 
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--midnight-navy);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-weight: 300;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION (REUSABLE) ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(5, 10, 20, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1.25rem var(--content-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: var(--soft-silver);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--soft-silver);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent-gold);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--soft-silver);
+            transition: all 0.3s ease;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            padding: 8rem var(--content-padding) 4rem;
+            margin-top: 70px;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201, 168, 112, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .page-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--accent-gold);
+            margin: var(--spacing-md) auto;
+        }
+
+        /* ===== CONTENT SECTIONS ===== */
+        section {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--content-padding);
+        }
+
+        .intro-section {
+            max-width: 800px;
+            margin: 0 auto var(--spacing-xl);
+            text-align: center;
+        }
+
+        .intro-section h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .intro-section p {
+            color: var(--text-secondary);
+            line-height: 2;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.05rem;
+        }
+
+        /* ===== IDEAL GUEST SECTION ===== */
+        .ideal-guest {
+            background: var(--deep-slate);
+            border: 1px solid var(--border-subtle);
+            padding: var(--spacing-xl) var(--content-padding);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .ideal-guest h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            color: var(--accent-gold);
+        }
+
+        .guest-criteria {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .criteria-item {
+            padding: var(--spacing-md);
+            background: rgba(5, 10, 20, 0.5);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .criteria-item h4 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-sm);
+            color: var(--soft-silver);
+        }
+
+        .criteria-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ===== FORM SECTION ===== */
+        .form-section {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-header h3 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-sm);
+            color: var(--accent-gold);
+        }
+
+        .form-header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .form-container {
+            background: var(--deep-slate);
+            border: 1px solid var(--border-subtle);
+            padding: var(--spacing-md);
+            min-height: 800px;
+        }
+
+        .form-container iframe {
+            width: 100%;
+            min-height: 1200px;
+            border: none;
+            background: white;
+        }
+
+        /* Placeholder if form isn't embedded yet */
+        .form-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 600px;
+            text-align: center;
+            padding: var(--spacing-xl);
+        }
+
+        .form-placeholder h4 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-placeholder p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-md);
+            max-width: 600px;
+        }
+
+        .placeholder-link {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 1.5px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+        }
+
+        .placeholder-link:hover {
+            background: var(--accent-gold);
+            color: var(--midnight-navy);
+            transform: translateY(-2px);
+        }
+
+        /* ===== PROCESS SECTION ===== */
+        .process-section {
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-xl);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .process-section h3 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .process-steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .process-step:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+        }
+
+        .step-content h4 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-xs);
+            color: var(--soft-silver);
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            :root {
+                --content-padding: 1.5rem;
+                --spacing-xl: 3rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(5, 10, 20, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .page-header {
+                padding: 6rem var(--content-padding) 3rem;
+            }
+
+            .guest-criteria {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Reflect and Rise</a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="starthere.html">Start Here</a></li>
+                <li><a href="episodelibrary.html">Episodes</a></li>
+                <li><a href="aboutus.html">About</a></li>
+                <li><a href="guestsubmission.html" class="active">Be a Guest</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">Be a Guest</h1>
+        <div class="divider"></div>
+        <p class="page-subtitle">
+            Share your insights, experiences, and wisdom with our community of seekers and learners
+        </p>
+    </header>
+
+    <!-- Introduction -->
+    <section>
+        <div class="intro-section">
+            <h2>Share Your Story</h2>
+            <div class="divider"></div>
+            <p>
+                We're always looking for authentic voices with powerful insights on emotional intelligence, 
+                self-awareness, personal growth, and the journey of rising through adversity.
+            </p>
+            <p>
+                Our conversations go deep. We explore the real work of transformation—the messy, challenging, 
+                beautiful process of becoming more conscious, compassionate, and whole human beings.
+            </p>
+        </div>
+    </section>
+
+    <!-- Ideal Guest Section -->
+    <div class="ideal-guest">
+        <h3>You Might Be a Great Fit If...</h3>
+        <div class="guest-criteria">
+            <div class="criteria-item">
+                <h4>Authentic Experience</h4>
+                <p>
+                    You've done deep personal work and have genuine insights from your own journey of growth, 
+                    healing, or transformation.
+                </p>
+            </div>
+
+            <div class="criteria-item">
+                <h4>Expertise & Wisdom</h4>
+                <p>
+                    You bring professional knowledge or lived experience in emotional intelligence, psychology, 
+                    leadership, or related fields.
+                </p>
+            </div>
+
+            <div class="criteria-item">
+                <h4>Vulnerability & Honesty</h4>
+                <p>
+                    You're willing to share your real story—including the struggles, failures, and breakthroughs 
+                    that shaped who you are.
+                </p>
+            </div>
+
+            <div class="criteria-item">
+                <h4>Practical Value</h4>
+                <p>
+                    You can offer actionable insights, frameworks, or practices that listeners can apply in 
+                    their own lives.
+                </p>
+            </div>
+
+            <div class="criteria-item">
+                <h4>Mission Alignment</h4>
+                <p>
+                    You resonate with our focus on self-awareness, emotional growth, and rising through 
+                    life's challenges.
+                </p>
+            </div>
+
+            <div class="criteria-item">
+                <h4>Engaging Communication</h4>
+                <p>
+                    You enjoy meaningful conversation and can articulate complex ideas in accessible, 
+                    compelling ways.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="form-header">
+            <h3>Submit Your Application</h3>
+            <div class="divider"></div>
+            <p>
+                Fill out the form below to tell us about yourself and why you'd like to be on the podcast.
+            </p>
+        </div>
+
+        <div class="form-container">
+            <!-- Replace the URL below with your actual Google Form embed URL -->
+            <!-- To get the embed URL: Open your Google Form → Send → Embed HTML → Copy the src URL -->
+            
+            <!-- PLACEHOLDER - Replace with actual Google Form -->
+            <div class="form-placeholder">
+                <h4>📋 Google Form Integration</h4>
+                <p>
+                    To embed your Google Form here, replace the iframe src in the code with your form's embed URL.
+                </p>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 1rem;">
+                    <strong>How to get your form URL:</strong><br>
+                    1. Open your Google Form<br>
+                    2. Click "Send" → Select the embed icon (&lt;/&gt;)<br>
+                    3. Copy the URL from src="..."<br>
+                    4. Paste it in the iframe src attribute below
+                </p>
+                <a href="https://forms.google.com" target="_blank" class="placeholder-link">
+                    CREATE YOUR GOOGLE FORM
+                </a>
+            </div>
+
+            <!-- UNCOMMENT AND USE THIS WHEN YOU HAVE YOUR GOOGLE FORM URL -->
+            <!--
+            <iframe 
+                src="YOUR_GOOGLE_FORM_EMBED_URL_HERE"
+                width="100%" 
+                height="1200" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0">
+                Loading…
+            </iframe>
+            -->
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <h3>What Happens Next?</h3>
+        <div class="divider"></div>
+
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Application Review</h4>
+                    <p>
+                        We carefully review every submission. Due to volume, we may not be able to respond to 
+                        everyone, but we read every application thoughtfully.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Pre-Interview Call</h4>
+                    <p>
+                        If we think you'd be a great fit, we'll schedule a brief call to discuss potential 
+                        conversation topics and ensure alignment.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Recording Session</h4>
+                    <p>
+                        We'll schedule a recording session (typically 60-90 minutes) via Zoom. We'll send you 
+                        prep materials and talking points beforehand.
+                    </p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Episode Launch</h4>
+                    <p>
+                        After editing and production, we'll schedule your episode release and provide you with 
+                        promotional materials to share with your audience.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
