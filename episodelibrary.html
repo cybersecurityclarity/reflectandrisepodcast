@@ -77,17 +77,19 @@
         }
 
         .nav-logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            color: var(--soft-silver);
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-logo img {
+            height: 50px;
+            width: auto;
         }
 
         .nav-logo:hover {
-            color: var(--accent-gold);
+            opacity: 0.8;
         }
 
         .nav-links {
@@ -416,7 +418,9 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">Reflect and Rise</a>
+            <a href="index.html" class="nav-logo">
+                <img src="Logo.png" alt="Reflect and Rise Podcast">
+            </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -424,10 +428,10 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="starthere.html">Start Here</a></li>
+                <li><a href="starthere.html">Start Here - About Us</a></li>
                 <li><a href="episodelibrary.html" class="active">Episodes</a></li>
-                <li><a href="aboutus.html">About</a></li>
                 <li><a href="guestsubmission.html">Be a Guest</a></li>
+                <li><a href="community.html">Join the Community</a></li>
             </ul>
         </div>
     </nav>
@@ -437,7 +441,7 @@
         <h1 class="page-title">Episode Library</h1>
         <div class="divider"></div>
         <p class="page-subtitle">
-            Explore our complete collection of conversations on emotional intelligence, self-awareness, and personal growth
+            Explore our complete collection of conversations from Reflect and Rise Podcast on emotional intelligence, self-awareness, and personal growth
         </p>
     </header>
 
