@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Start Here | Reflect and Rise Podcast</title>
-    <meta name="description" content="Begin your journey of self-discovery and emotional growth with Reflect and Rise.">
+    <title>Start Here - About Us | Reflect and Rise Podcast</title>
+    <meta name="description" content="Begin your journey with Reflect and Rise Podcast and learn about our mission.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -78,17 +78,19 @@
         }
 
         .nav-logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            color: var(--soft-silver);
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-logo img {
+            height: 50px;
+            width: auto;
         }
 
         .nav-logo:hover {
-            color: var(--accent-gold);
+            opacity: 0.8;
         }
 
         .nav-links {
@@ -213,6 +215,126 @@
             line-height: 2;
             margin-bottom: var(--spacing-md);
             font-size: 1.05rem;
+        }
+
+        /* ===== STORY SECTION ===== */
+        .story-section {
+            background: var(--deep-slate);
+            border: 1px solid var(--border-subtle);
+            padding: var(--spacing-xl) var(--content-padding);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-content h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+            color: var(--accent-gold);
+        }
+
+        .story-content p {
+            color: var(--text-secondary);
+            line-height: 2;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.05rem;
+        }
+
+        .story-content .highlight {
+            color: var(--soft-silver);
+            font-style: italic;
+        }
+
+        /* ===== HOST SECTION ===== */
+        .host-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+            margin: var(--spacing-xl) 0;
+        }
+
+        .host-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--deep-slate);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .host-image::before {
+            content: 'Host Photo';
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .host-info h3 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-sm);
+            color: var(--accent-gold);
+        }
+
+        .host-title {
+            font-size: 1.1rem;
+            color: var(--muted-gold);
+            margin-bottom: var(--spacing-md);
+            letter-spacing: 1px;
+        }
+
+        .host-info p {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* ===== VALUES GRID ===== */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .value-item {
+            background: var(--deep-slate);
+            border: 1px solid var(--border-subtle);
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .value-item:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .value-item h4 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-sm);
+            color: var(--soft-silver);
+        }
+
+        .value-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
         }
 
         /* ===== RECOMMENDED EPISODES ===== */
@@ -361,20 +483,6 @@
             box-shadow: 0 10px 30px rgba(201, 168, 112, 0.2);
         }
 
-        /* ===== GLOBAL AUDIO PLAYER ===== */
-        .global-player {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: var(--player-height);
-            background: rgba(13, 22, 33, 0.98);
-            backdrop-filter: blur(16px);
-            border-top: 1px solid var(--border-subtle);
-            z-index: 1000;
-            display: none;
-        }
-
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 768px) {
             :root {
@@ -435,6 +543,14 @@
                 height: 50px;
                 font-size: 1.25rem;
             }
+
+            .host-section {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -442,7 +558,9 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">Reflect and Rise</a>
+            <a href="index.html" class="nav-logo">
+                <img src="Logo.png" alt="Reflect and Rise Podcast">
+            </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -450,17 +568,17 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="starthere.html" class="active">Start Here</a></li>
+                <li><a href="starthere.html" class="active">Start Here - About Us</a></li>
                 <li><a href="episodelibrary.html">Episodes</a></li>
-                <li><a href="aboutus.html">About</a></li>
                 <li><a href="guestsubmission.html">Be a Guest</a></li>
+                <li><a href="community.html">Join the Community</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Page Header -->
     <header class="page-header">
-        <h1 class="page-title">Start Your Journey</h1>
+        <h1 class="page-title">Start Here - About Us</h1>
         <div class="divider"></div>
         <p class="page-subtitle">
             Welcome. If you're here, you're ready to explore deeper questions about yourself, 
@@ -471,9 +589,9 @@
     <!-- Welcome Section -->
     <section>
         <div class="content-block">
-            <h2>What is Reflect and Rise?</h2>
+            <h2>What is Reflect and Rise Podcast?</h2>
             <p>
-                Reflect and Rise is a podcast dedicated to exploring the inner landscape of emotional intelligence, 
+                Reflect and Rise Podcast is dedicated to exploring the inner landscape of emotional intelligence, 
                 self-awareness, and personal growth. We dive into the messy, beautiful work of understanding ourselves—our 
                 patterns, our triggers, our potential for transformation.
             </p>
@@ -487,7 +605,7 @@
         <div class="content-block">
             <h2>Who is this podcast for?</h2>
             <p>
-                You don't need to be in crisis to benefit from this work. Reflect and Rise is for anyone who wants to 
+                You don't need to be in crisis to benefit from this work. Reflect and Rise Podcast is for anyone who wants to 
                 live more consciously, relate more authentically, and navigate life's challenges with greater wisdom and resilience.
             </p>
             <p>
@@ -495,6 +613,134 @@
                 Someone healing from trauma. Or simply a curious soul committed to continuous growth. Wherever you are on 
                 your journey, there's space for you here.
             </p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <div class="story-section">
+        <div class="story-content">
+            <h2>Our Story</h2>
+            <div class="divider"></div>
+            <p>
+                Reflect and Rise Podcast was born from a simple recognition: <span class="highlight">the conversations we need 
+                most are often the ones we're least equipped to have.</span>
+            </p>
+            <p>
+                In our own journeys through hardship, healing, and growth, we discovered that transformation happens 
+                not in isolation, but in connection. When we find the courage to share our struggles, our questions, 
+                and our breakthroughs, we create pathways for others to do the same.
+            </p>
+            <p>
+                This podcast emerged from countless late-night conversations about emotional intelligence, the patterns 
+                we inherit, and the person we're becoming. We realized these weren't just personal questions—they were 
+                universal ones. And they deserved a dedicated space for exploration.
+            </p>
+            <p>
+                Today, Reflect and Rise Podcast serves a community of seekers, healers, leaders, and lifelong learners who 
+                believe that understanding ourselves is the foundation for everything else we hope to build.
+            </p>
+        </div>
+    </div>
+
+    <!-- Mission Section -->
+    <section>
+        <div class="content-block" style="text-align: center;">
+            <h2>Our Mission</h2>
+            <div class="divider"></div>
+            <p>
+                Reflect and Rise Podcast exists to create meaningful conversations about the inner work that transforms lives. 
+                In a world that often prioritizes productivity over presence and achievement over authenticity, we believe 
+                there's profound power in pausing to understand ourselves more deeply.
+            </p>
+            <p>
+                We're here to explore what it means to be emotionally intelligent, self-aware human beings navigating 
+                the complexity of modern life. Through honest dialogue, vulnerable storytelling, and evidence-based insights, 
+                we create space for the kind of reflection that leads to genuine growth.
+            </p>
+        </div>
+    </section>
+
+    <!-- Host Section -->
+    <section>
+        <div class="host-section">
+            <div class="host-image"></div>
+            <div class="host-info">
+                <h3>Your Host</h3>
+                <p class="host-title">FOUNDER & HOST</p>
+                <p>
+                    [Host bio goes here. This is where you would share your background, what brought you to this work, 
+                    your credentials or lived experience that informs the podcast, and what drives your passion for 
+                    emotional intelligence and self-awareness.]
+                </p>
+                <p>
+                    [Additional paragraph about your approach, philosophy, or what listeners can expect from you as a 
+                    host and conversation facilitator.]
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section>
+        <div class="content-block" style="text-align: center; margin-bottom: 3rem;">
+            <h2>What We Believe</h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-item">
+                <div class="value-icon">🧭</div>
+                <h4>Authenticity</h4>
+                <p>
+                    Real growth happens in honest spaces. We show up as we are, not as we think we should be, 
+                    creating room for genuine connection and transformation.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">🌱</div>
+                <h4>Growth Mindset</h4>
+                <p>
+                    We're all works in progress. There's no arrival point, only continuous evolution through 
+                    awareness, intention, and practice.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">💫</div>
+                <h4>Compassion</h4>
+                <p>
+                    Change is hard. We approach ourselves and others with kindness, recognizing that everyone 
+                    is doing their best with the tools they have.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">🔥</div>
+                <h4>Courage</h4>
+                <p>
+                    The deepest work requires bravery. We honor the courage it takes to look inward, face 
+                    our shadows, and choose growth over comfort.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">🌊</div>
+                <h4>Integration</h4>
+                <p>
+                    Wisdom without application is incomplete. We focus on practical, embodied change that 
+                    shows up in how we live our daily lives.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">🤝</div>
+                <h4>Community</h4>
+                <p>
+                    We're better together. Shared experiences, collective wisdom, and mutual support amplify 
+                    individual transformation into collective healing.
+                </p>
+            </div>
         </div>
     </section>
 
