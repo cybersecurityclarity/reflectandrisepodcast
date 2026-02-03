@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Be a Guest | Reflect and Rise Podcast</title>
-    <meta name="description" content="Share your story and insights on Reflect and Rise podcast.">
+    <meta name="description" content="Share your story and insights on Reflect and Rise Podcast.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -75,17 +75,19 @@
         }
 
         .nav-logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            color: var(--soft-silver);
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-logo img {
+            height: 50px;
+            width: auto;
         }
 
         .nav-logo:hover {
-            color: var(--accent-gold);
+            opacity: 0.8;
         }
 
         .nav-links {
@@ -190,26 +192,6 @@
             max-width: var(--max-width);
             margin: 0 auto;
             padding: var(--spacing-lg) var(--content-padding);
-        }
-
-        .intro-section {
-            max-width: 800px;
-            margin: 0 auto var(--spacing-xl);
-            text-align: center;
-        }
-
-        .intro-section h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 400;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .intro-section p {
-            color: var(--text-secondary);
-            line-height: 2;
-            margin-bottom: var(--spacing-md);
-            font-size: 1.05rem;
         }
 
         /* ===== IDEAL GUEST SECTION ===== */
@@ -459,7 +441,9 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">Reflect and Rise</a>
+            <a href="index.html" class="nav-logo">
+                <img src="Logo.png" alt="Reflect and Rise Podcast">
+            </a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -467,10 +451,10 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="starthere.html">Start Here</a></li>
+                <li><a href="starthere.html">Start Here - About Us</a></li>
                 <li><a href="episodelibrary.html">Episodes</a></li>
-                <li><a href="aboutus.html">About</a></li>
                 <li><a href="guestsubmission.html" class="active">Be a Guest</a></li>
+                <li><a href="community.html">Join the Community</a></li>
             </ul>
         </div>
     </nav>
@@ -479,26 +463,7 @@
     <header class="page-header">
         <h1 class="page-title">Be a Guest</h1>
         <div class="divider"></div>
-        <p class="page-subtitle">
-            Share your insights, experiences, and wisdom with our community of seekers and learners
-        </p>
     </header>
-
-    <!-- Introduction -->
-    <section>
-        <div class="intro-section">
-            <h2>Share Your Story</h2>
-            <div class="divider"></div>
-            <p>
-                We're always looking for authentic voices with powerful insights on emotional intelligence, 
-                self-awareness, personal growth, and the journey of rising through adversity.
-            </p>
-            <p>
-                Our conversations go deep. We explore the real work of transformation—the messy, challenging, 
-                beautiful process of becoming more conscious, compassionate, and whole human beings.
-            </p>
-        </div>
-    </section>
 
     <!-- Ideal Guest Section -->
     <div class="ideal-guest">
@@ -588,7 +553,15 @@
 
             <!-- UNCOMMENT AND USE THIS WHEN YOU HAVE YOUR GOOGLE FORM URL -->
             <!--
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfiiyw8dFrKYVebnCLHuBHBRjEKsjFaxeMRIl4pItZGwJNk3Q/viewform?embedded=true" width="640" height="1902" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            <iframe 
+                src="YOUR_GOOGLE_FORM_EMBED_URL_HERE"
+                width="100%" 
+                height="1200" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0">
+                Loading…
+            </iframe>
             -->
         </div>
     </section>
