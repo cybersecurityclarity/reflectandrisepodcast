@@ -1,1 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Reflect and Rise Podcast</title>
+    <meta name="description" content="Learn about the mission, vision, and people behind Reflect and Rise podcast.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ===== THEME VARIABLES (REUSABLE) ===== */
+        :root {
+            --midnight-navy: #050A14;
+            --deep-slate: #0D1621;
+            --soft-silver: #E8E8E8;
+            --warm-silver: #D4D4D4;
+            --accent-gold: #C9A870;
+            --muted-gold: #9B855A;
+            --text-primary: #E8E8E8;
+            --text-secondary: #B8B8B8;
+            --border-subtle: rgba(232, 232, 232, 0.12);
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Work Sans', sans-serif;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 3rem;
+            --spacing-xl: 5rem;
+            --max-width: 1200px;
+            --content-padding: 2rem;
+            --player-height: 100px;
+        }
 
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--midnight-navy);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-weight: 300;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION (REUSABLE) ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(5, 10, 20, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1.25rem var(--content-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: var(--soft-silver);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--soft-silver);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent-gold);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--soft-silver);
+            transition: all 0.3s ease;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            padding: 8rem var(--content-padding) 4rem;
+            margin-top: 70px;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(201, 168, 112, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .page-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--accent-gold);
+            margin: var(--spacing-md) auto;
+        }
+
+        /* ===== CONTENT SECTIONS ===== */
+        section {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-lg) var(--content-padding);
+        }
+
+        .content-block {
+            max-width: 900px;
+            margin: 0 auto var(--spacing-xl);
+        }
+
+        .content-block h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+        }
+
+        .content-block p {
+            color: var(--text-secondary);
+            line-height: 2;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.05rem;
+        }
+
+        /* ===== STORY SECTION ===== */
+        .story-section {
+            background: var(--deep-slate);
+            border: 1px solid var(--border-subtle);
+            padding: var(--spacing-xl) var(--content-padding);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-content h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+            color: var(--accent-gold);
+        }
+
+        .story-content p {
+            color: var(--text-secondary);
+            line-height: 2;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.05rem;
+        }
+
+        .story-content .highlight {
+            color: var(--soft-silver);
+            font-style: italic;
+        }
+
+        /* ===== HOST SECTION ===== */
+        .host-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+            margin: var(--spacing-xl) 0;
+        }
+
+        .host-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--deep-slate);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .host-image::before {
+            content: 'Host Photo';
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .host-info h3 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-sm);
+            color: var(--accent-gold);
+        }
+
+        .host-title {
+            font-size: 1.1rem;
+            color: var(--muted-gold);
+            margin-bottom: var(--spacing-md);
+            letter-spacing: 1px;
+        }
+
+        .host-info p {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* ===== VALUES GRID ===== */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .value-item {
+            background: var(--deep-slate);
+            border: 1px solid var(--border-subtle);
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .value-item:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .value-item h4 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-sm);
+            color: var(--soft-silver);
+        }
+
+        .value-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ===== CONTACT CTA ===== */
+        .contact-cta {
+            background: var(--deep-slate);
+            border: 2px solid var(--accent-gold);
+            padding: var(--spacing-xl);
+            text-align: center;
+            margin: var(--spacing-xl) auto;
+            max-width: 800px;
+        }
+
+        .contact-cta h3 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-sm);
+            color: var(--accent-gold);
+        }
+
+        .contact-cta p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 1.5px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-gold);
+            color: var(--midnight-navy);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 168, 112, 0.2);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            :root {
+                --content-padding: 1.5rem;
+                --spacing-xl: 3rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(5, 10, 20, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .page-header {
+                padding: 6rem var(--content-padding) 3rem;
+            }
+
+            .host-section {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Reflect and Rise</a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="starthere.html">Start Here</a></li>
+                <li><a href="episodelibrary.html">Episodes</a></li>
+                <li><a href="aboutus.html" class="active">About</a></li>
+                <li><a href="guestsubmission.html">Be a Guest</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">About Us</h1>
+        <div class="divider"></div>
+        <p class="page-subtitle">
+            The story behind Reflect and Rise and the mission that drives every conversation
+        </p>
+    </header>
+
+    <!-- Mission Section -->
+    <section>
+        <div class="content-block">
+            <h2>Our Mission</h2>
+            <div class="divider"></div>
+            <p>
+                Reflect and Rise exists to create meaningful conversations about the inner work that transforms lives. 
+                In a world that often prioritizes productivity over presence and achievement over authenticity, we believe 
+                there's profound power in pausing to understand ourselves more deeply.
+            </p>
+            <p>
+                We're here to explore what it means to be emotionally intelligent, self-aware human beings navigating 
+                the complexity of modern life. Through honest dialogue, vulnerable storytelling, and evidence-based insights, 
+                we create space for the kind of reflection that leads to genuine growth.
+            </p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <div class="story-section">
+        <div class="story-content">
+            <h2>Our Story</h2>
+            <div class="divider"></div>
+            <p>
+                Reflect and Rise was born from a simple recognition: <span class="highlight">the conversations we need 
+                most are often the ones we're least equipped to have.</span>
+            </p>
+            <p>
+                In our own journeys through hardship, healing, and growth, we discovered that transformation happens 
+                not in isolation, but in connection. When we find the courage to share our struggles, our questions, 
+                and our breakthroughs, we create pathways for others to do the same.
+            </p>
+            <p>
+                This podcast emerged from countless late-night conversations about emotional intelligence, the patterns 
+                we inherit, and the person we're becoming. We realized these weren't just personal questions—they were 
+                universal ones. And they deserved a dedicated space for exploration.
+            </p>
+            <p>
+                Today, Reflect and Rise serves a community of seekers, healers, leaders, and lifelong learners who 
+                believe that understanding ourselves is the foundation for everything else we hope to build.
+            </p>
+        </div>
+    </div>
+
+    <!-- Host Section -->
+    <section>
+        <div class="host-section">
+            <div class="host-image"></div>
+            <div class="host-info">
+                <h3>Your Host</h3>
+                <p class="host-title">FOUNDER & HOST</p>
+                <p>
+                    [Host bio goes here. This is where you would share your background, what brought you to this work, 
+                    your credentials or lived experience that informs the podcast, and what drives your passion for 
+                    emotional intelligence and self-awareness.]
+                </p>
+                <p>
+                    [Additional paragraph about your approach, philosophy, or what listeners can expect from you as a 
+                    host and conversation facilitator.]
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section>
+        <div class="content-block" style="text-align: center; margin-bottom: 3rem;">
+            <h2>What We Believe</h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-item">
+                <div class="value-icon">🧭</div>
+                <h4>Authenticity</h4>
+                <p>
+                    Real growth happens in honest spaces. We show up as we are, not as we think we should be, 
+                    creating room for genuine connection and transformation.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">🌱</div>
+                <h4>Growth Mindset</h4>
+                <p>
+                    We're all works in progress. There's no arrival point, only continuous evolution through 
+                    awareness, intention, and practice.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">💫</div>
+                <h4>Compassion</h4>
+                <p>
+                    Change is hard. We approach ourselves and others with kindness, recognizing that everyone 
+                    is doing their best with the tools they have.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">🔥</div>
+                <h4>Courage</h4>
+                <p>
+                    The deepest work requires bravery. We honor the courage it takes to look inward, face 
+                    our shadows, and choose growth over comfort.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">🌊</div>
+                <h4>Integration</h4>
+                <p>
+                    Wisdom without application is incomplete. We focus on practical, embodied change that 
+                    shows up in how we live our daily lives.
+                </p>
+            </div>
+
+            <div class="value-item">
+                <div class="value-icon">🤝</div>
+                <h4>Community</h4>
+                <p>
+                    We're better together. Shared experiences, collective wisdom, and mutual support amplify 
+                    individual transformation into collective healing.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section>
+        <div class="contact-cta">
+            <h3>Want to Share Your Story?</h3>
+            <p>
+                We're always looking for authentic voices and powerful stories that can inspire and educate our community. 
+                If you have insights on emotional intelligence, personal growth, or rising through adversity, we'd love to hear from you.
+            </p>
+            <a href="guestsubmission.html" class="cta-button">APPLY TO BE A GUEST</a>
+        </div>
+    </section>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
