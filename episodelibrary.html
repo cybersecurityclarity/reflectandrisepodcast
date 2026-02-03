@@ -1,1 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Episode Library | Reflect and Rise Podcast</title>
+    <meta name="description" content="Browse all episodes of Reflect and Rise podcast on YouTube and Spotify.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ===== THEME VARIABLES (REUSABLE) ===== */
+        :root {
+            --midnight-navy: #050A14;
+            --deep-slate: #0D1621;
+            --soft-silver: #E8E8E8;
+            --warm-silver: #D4D4D4;
+            --accent-gold: #C9A870;
+            --muted-gold: #9B855A;
+            --text-primary: #E8E8E8;
+            --text-secondary: #B8B8B8;
+            --border-subtle: rgba(232, 232, 232, 0.12);
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Work Sans', sans-serif;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 3rem;
+            --spacing-xl: 5rem;
+            --max-width: 1200px;
+            --content-padding: 2rem;
+            --player-height: 100px;
+        }
 
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--midnight-navy);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-weight: 300;
+            font-size: 16px;
+            padding-bottom: var(--player-height);
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION (REUSABLE) ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(5, 10, 20, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1.25rem var(--content-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: var(--soft-silver);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--soft-silver);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent-gold);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--soft-silver);
+            transition: all 0.3s ease;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            padding: 8rem var(--content-padding) 4rem;
+            margin-top: 70px;
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--accent-gold);
+            margin: var(--spacing-md) auto;
+        }
+
+        /* ===== FILTER SECTION ===== */
+        .filter-section {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--content-padding) var(--spacing-lg);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--midnight-navy);
+        }
+
+        /* ===== EPISODES GRID ===== */
+        .episodes-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--content-padding) var(--spacing-xl);
+        }
+
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .episode-item {
+            background: var(--deep-slate);
+            border: 1px solid var(--border-subtle);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .episode-item:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .episode-thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--midnight-navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-subtle);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .episode-thumbnail::before {
+            content: '▶';
+            position: absolute;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            opacity: 0.3;
+        }
+
+        .episode-content {
+            padding: var(--spacing-md);
+        }
+
+        .episode-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .episode-number {
+            font-size: 0.85rem;
+            color: var(--muted-gold);
+            letter-spacing: 1px;
+        }
+
+        .episode-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .episode-item h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-sm);
+            color: var(--soft-silver);
+            line-height: 1.4;
+        }
+
+        .episode-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .episode-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .platform-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 130px;
+            justify-content: center;
+        }
+
+        .platform-link:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .platform-link.youtube:hover {
+            border-color: #FF0000;
+            color: #FF0000;
+        }
+
+        .platform-link.spotify:hover {
+            border-color: #1DB954;
+            color: #1DB954;
+        }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-xl);
+            color: var(--text-secondary);
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            :root {
+                --content-padding: 1.5rem;
+                --spacing-xl: 3rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(5, 10, 20, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .page-header {
+                padding: 6rem var(--content-padding) 3rem;
+            }
+
+            .episodes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-section {
+                flex-direction: column;
+            }
+
+            .filter-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .episode-links {
+                flex-direction: column;
+            }
+
+            .platform-link {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Reflect and Rise</a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="starthere.html">Start Here</a></li>
+                <li><a href="episodelibrary.html" class="active">Episodes</a></li>
+                <li><a href="aboutus.html">About</a></li>
+                <li><a href="guestsubmission.html">Be a Guest</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">Episode Library</h1>
+        <div class="divider"></div>
+        <p class="page-subtitle">
+            Explore our complete collection of conversations on emotional intelligence, self-awareness, and personal growth
+        </p>
+    </header>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <button class="filter-btn active" onclick="filterEpisodes('all')">All Episodes</button>
+        <button class="filter-btn" onclick="filterEpisodes('recent')">Most Recent</button>
+        <button class="filter-btn" onclick="filterEpisodes('popular')">Most Popular</button>
+        <button class="filter-btn" onclick="filterEpisodes('featured')">Featured</button>
+    </div>
+
+    <!-- Episodes Grid -->
+    <div class="episodes-container">
+        <div class="episodes-grid" id="episodesGrid">
+            <!-- Episode 1 -->
+            <div class="episode-item" data-category="featured">
+                <div class="episode-thumbnail"></div>
+                <div class="episode-content">
+                    <div class="episode-meta">
+                        <span class="episode-number">EPISODE 01</span>
+                        <span class="episode-date">Jan 15, 2026</span>
+                    </div>
+                    <h3>The Foundation of Self-Awareness</h3>
+                    <p class="episode-description">
+                        Exploring the critical first step in any journey of growth: becoming aware of our inner world and 
+                        the patterns that shape our lives.
+                    </p>
+                    <div class="episode-links">
+                        <a href="#" class="platform-link youtube">
+                            <span>▶</span> YouTube
+                        </a>
+                        <a href="#" class="platform-link spotify">
+                            <span>🎵</span> Spotify
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 2 -->
+            <div class="episode-item" data-category="recent">
+                <div class="episode-thumbnail"></div>
+                <div class="episode-content">
+                    <div class="episode-meta">
+                        <span class="episode-number">EPISODE 02</span>
+                        <span class="episode-date">Jan 22, 2026</span>
+                    </div>
+                    <h3>Understanding Your Emotional Triggers</h3>
+                    <p class="episode-description">
+                        Why do certain situations set us off? A deep dive into the psychology of triggers and how to work 
+                        with them instead of against them.
+                    </p>
+                    <div class="episode-links">
+                        <a href="#" class="platform-link youtube">
+                            <span>▶</span> YouTube
+                        </a>
+                        <a href="#" class="platform-link spotify">
+                            <span>🎵</span> Spotify
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 3 -->
+            <div class="episode-item" data-category="popular">
+                <div class="episode-thumbnail"></div>
+                <div class="episode-content">
+                    <div class="episode-meta">
+                        <span class="episode-number">EPISODE 03</span>
+                        <span class="episode-date">Jan 29, 2026</span>
+                    </div>
+                    <h3>The Power of Vulnerability</h3>
+                    <p class="episode-description">
+                        Why showing up authentically is both terrifying and transformative. A conversation about courage, 
+                        connection, and the strength found in openness.
+                    </p>
+                    <div class="episode-links">
+                        <a href="#" class="platform-link youtube">
+                            <span>▶</span> YouTube
+                        </a>
+                        <a href="#" class="platform-link spotify">
+                            <span>🎵</span> Spotify
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 4 -->
+            <div class="episode-item" data-category="recent">
+                <div class="episode-thumbnail"></div>
+                <div class="episode-content">
+                    <div class="episode-meta">
+                        <span class="episode-number">EPISODE 04</span>
+                        <span class="episode-date">Feb 5, 2026</span>
+                    </div>
+                    <h3>Breaking Generational Patterns</h3>
+                    <p class="episode-description">
+                        The family dynamics we inherited don't have to be our destiny. Strategies for recognizing and 
+                        transforming intergenerational trauma.
+                    </p>
+                    <div class="episode-links">
+                        <a href="#" class="platform-link youtube">
+                            <span>▶</span> YouTube
+                        </a>
+                        <a href="#" class="platform-link spotify">
+                            <span>🎵</span> Spotify
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 5 -->
+            <div class="episode-item" data-category="featured popular">
+                <div class="episode-thumbnail"></div>
+                <div class="episode-content">
+                    <div class="episode-meta">
+                        <span class="episode-number">EPISODE 05</span>
+                        <span class="episode-date">Feb 12, 2026</span>
+                    </div>
+                    <h3>Emotional Intelligence in Action</h3>
+                    <p class="episode-description">
+                        Moving beyond theory into practice. How to develop the skills that transform our relationships 
+                        and create meaningful change in our daily lives.
+                    </p>
+                    <div class="episode-links">
+                        <a href="#" class="platform-link youtube">
+                            <span>▶</span> YouTube
+                        </a>
+                        <a href="#" class="platform-link spotify">
+                            <span>🎵</span> Spotify
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 6 -->
+            <div class="episode-item" data-category="recent">
+                <div class="episode-thumbnail"></div>
+                <div class="episode-content">
+                    <div class="episode-meta">
+                        <span class="episode-number">EPISODE 06</span>
+                        <span class="episode-date">Feb 19, 2026</span>
+                    </div>
+                    <h3>The Art of Setting Boundaries</h3>
+                    <p class="episode-description">
+                        Healthy boundaries aren't selfish—they're essential. Learning to protect your energy while 
+                        maintaining connection and compassion.
+                    </p>
+                    <div class="episode-links">
+                        <a href="#" class="platform-link youtube">
+                            <span>▶</span> YouTube
+                        </a>
+                        <a href="#" class="platform-link spotify">
+                            <span>🎵</span> Spotify
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more episodes as needed -->
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        function filterEpisodes(category) {
+            const episodes = document.querySelectorAll('.episode-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter episodes
+            episodes.forEach(episode => {
+                if (category === 'all') {
+                    episode.style.display = 'block';
+                } else {
+                    const categories = episode.dataset.category || '';
+                    if (categories.includes(category)) {
+                        episode.style.display = 'block';
+                    } else {
+                        episode.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
