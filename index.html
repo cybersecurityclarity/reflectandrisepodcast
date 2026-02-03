@@ -1,1 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflect and Rise Podcast | Emotional Intelligence & Self-Awareness</title>
+    <meta name="description" content="A podcast exploring emotional intelligence, self-awareness, and rising through hardship.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ===== THEME VARIABLES ===== */
+        :root {
+            --midnight-navy: #050A14;
+            --deep-slate: #0D1621;
+            --soft-silver: #E8E8E8;
+            --warm-silver: #D4D4D4;
+            --accent-gold: #C9A870;
+            --muted-gold: #9B855A;
+            --text-primary: #E8E8E8;
+            --text-secondary: #B8B8B8;
+            --border-subtle: rgba(232, 232, 232, 0.12);
+            
+            /* Typography */
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Work Sans', sans-serif;
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 3rem;
+            --spacing-xl: 5rem;
+            
+            /* Layout */
+            --max-width: 1200px;
+            --content-padding: 2rem;
+            --player-height: 100px;
+        }
 
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--midnight-navy);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-weight: 300;
+            font-size: 16px;
+            padding-bottom: var(--player-height);
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(5, 10, 20, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1.25rem var(--content-padding);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: var(--soft-silver);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--soft-silver);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent-gold);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--soft-silver);
+            transition: all 0.3s ease;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--spacing-xl) var(--content-padding);
+            margin-top: 70px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 168, 112, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-logo {
+            width: 200px;
+            height: 200px;
+            margin-bottom: var(--spacing-md);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: var(--spacing-sm);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto var(--spacing-lg);
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.6s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 1.5px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-gold);
+            color: var(--midnight-navy);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 168, 112, 0.2);
+        }
+
+        /* ===== SECTION STYLES ===== */
+        section {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--content-padding);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Divider */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--accent-gold);
+            margin: 0 auto var(--spacing-md);
+        }
+
+        /* ===== LATEST EPISODE SECTION ===== */
+        .latest-episode {
+            background: var(--deep-slate);
+            border: 1px solid var(--border-subtle);
+            padding: var(--spacing-lg);
+            border-radius: 4px;
+        }
+
+        .episode-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-bottom: var(--spacing-md);
+            background: var(--midnight-navy);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .episode-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .episode-info h3 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-sm);
+            color: var(--soft-silver);
+        }
+
+        .episode-info p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .listen-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: var(--spacing-md);
+        }
+
+        .listen-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .listen-link:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        /* ===== MISSION SECTION ===== */
+        .mission {
+            text-align: center;
+        }
+
+        .mission-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .mission-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+            font-weight: 300;
+        }
+
+        .mission-values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .value-card {
+            padding: var(--spacing-md);
+            background: var(--deep-slate);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.4s ease;
+        }
+
+        .value-card:hover {
+            border-color: var(--muted-gold);
+            transform: translateY(-5px);
+        }
+
+        .value-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: var(--spacing-sm);
+            color: var(--accent-gold);
+        }
+
+        .value-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ===== GLOBAL AUDIO PLAYER ===== */
+        .global-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--player-height);
+            background: rgba(13, 22, 33, 0.98);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border-subtle);
+            z-index: 1000;
+            display: none;
+        }
+
+        .global-player.active {
+            display: block;
+        }
+
+        .player-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--content-padding);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .player-artwork {
+            width: 60px;
+            height: 60px;
+            background: var(--midnight-navy);
+            border: 1px solid var(--border-subtle);
+            flex-shrink: 0;
+        }
+
+        .player-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .player-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--soft-silver);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .player-episode {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .player-btn {
+            background: transparent;
+            border: none;
+            color: var(--soft-silver);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .player-btn:hover {
+            color: var(--accent-gold);
+        }
+
+        .player-progress {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .progress-time {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            min-width: 45px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 4px;
+            background: var(--border-subtle);
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-gold);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            :root {
+                --content-padding: 1.5rem;
+                --spacing-xl: 3rem;
+                --player-height: 80px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(5, 10, 20, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .hero {
+                min-height: 80vh;
+                padding: var(--spacing-lg) var(--content-padding);
+            }
+
+            .hero-logo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .mission-values {
+                grid-template-columns: 1fr;
+            }
+
+            .player-container {
+                flex-wrap: wrap;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .player-info {
+                flex: 0 0 100%;
+                order: 1;
+            }
+
+            .player-controls {
+                order: 2;
+            }
+
+            .player-progress {
+                order: 3;
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .listen-links {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .player-artwork {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Reflect and Rise</a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="starthere.html">Start Here</a></li>
+                <li><a href="episodelibrary.html">Episodes</a></li>
+                <li><a href="aboutus.html">About</a></li>
+                <li><a href="guestsubmission.html">Be a Guest</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="Logo.png" alt="Reflect and Rise Podcast Logo" class="hero-logo">
+        <h1>Reflect and Rise</h1>
+        <p class="hero-tagline">
+            A journey through emotional intelligence, self-awareness, and the courage to rise through hardship
+        </p>
+        <a href="starthere.html" class="cta-button">START YOUR JOURNEY</a>
+    </section>
+
+    <!-- Latest Episode Section -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Latest Episode</h2>
+            <div class="divider"></div>
+        </div>
+        
+        <div class="latest-episode">
+            <div class="episode-embed">
+                <!-- Replace with actual YouTube embed -->
+                <iframe 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="Latest Episode" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <div class="episode-info">
+                <h3>Episode Title Goes Here</h3>
+                <p>
+                    This is where your episode description will appear. Share insights about emotional growth, 
+                    vulnerability, and the transformative power of self-awareness. Each episode is a conversation 
+                    that invites listeners to pause, reflect, and discover new pathways to personal resilience.
+                </p>
+                
+                <div class="listen-links">
+                    <a href="#" class="listen-link">
+                        <span>▶</span> Watch on YouTube
+                    </a>
+                    <a href="#" class="listen-link">
+                        <span>🎵</span> Listen on Spotify
+                    </a>
+                    <a href="#" class="listen-link">
+                        <span>🎙️</span> Apple Podcasts
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <div class="section-header">
+            <h2 class="section-title">Our Mission</h2>
+            <div class="divider"></div>
+            <p class="section-subtitle">
+                We believe that true strength comes from within, through understanding ourselves and rising through life's challenges
+            </p>
+        </div>
+        
+        <div class="mission-content">
+            <p class="mission-text">
+                Reflect and Rise is more than a podcast—it's a sanctuary for those seeking to deepen their 
+                emotional intelligence, cultivate self-awareness, and transform hardship into growth. Through 
+                authentic conversations and vulnerable storytelling, we create space for healing, reflection, 
+                and meaningful change.
+            </p>
+            
+            <div class="mission-values">
+                <div class="value-card">
+                    <h4>Self-Awareness</h4>
+                    <p>Understanding our inner world is the foundation of all growth and transformation.</p>
+                </div>
+                <div class="value-card">
+                    <h4>Emotional Intelligence</h4>
+                    <p>Developing the capacity to navigate our emotions with wisdom and compassion.</p>
+                </div>
+                <div class="value-card">
+                    <h4>Resilience</h4>
+                    <p>Finding strength in vulnerability and rising stronger through life's challenges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Audio Player (Hidden by default) -->
+    <div class="global-player" id="globalPlayer">
+        <div class="player-container">
+            <div class="player-info">
+                <div class="player-artwork"></div>
+                <div class="player-details">
+                    <div class="player-title">Episode Title</div>
+                    <div class="player-episode">Reflect and Rise Podcast</div>
+                </div>
+            </div>
+            
+            <div class="player-controls">
+                <button class="player-btn" onclick="skipBackward()">⏪</button>
+                <button class="player-btn" onclick="togglePlay()">▶️</button>
+                <button class="player-btn" onclick="skipForward()">⏩</button>
+            </div>
+            
+            <div class="player-progress">
+                <span class="progress-time">0:00</span>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <span class="progress-time">45:30</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        // Global Player Functions (Placeholder)
+        function togglePlay() {
+            console.log('Play/Pause toggled');
+            // Implement actual audio playback
+        }
+
+        function skipForward() {
+            console.log('Skip forward 15s');
+        }
+
+        function skipBackward() {
+            console.log('Skip backward 15s');
+        }
+
+        // Show player when needed
+        function showPlayer() {
+            document.getElementById('globalPlayer').classList.add('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
