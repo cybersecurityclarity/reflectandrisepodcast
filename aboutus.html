@@ -256,20 +256,20 @@
             margin: var(--spacing-xl) 0;
         }
 
+        /* UPDATED: Real photo styles */
         .host-image {
             width: 100%;
-            aspect-ratio: 1;
-            background: var(--deep-slate);
+            aspect-ratio: 3/4;
+            overflow: hidden;
             border: 1px solid var(--border-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .host-image::before {
-            content: 'Host Photo';
-            color: var(--text-secondary);
-            font-size: 1.2rem;
+        .host-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
         }
 
         .host-info h3 {
@@ -511,7 +511,10 @@
     <!-- Host Section -->
     <section>
         <div class="host-section">
-            <div class="host-image"></div>
+            <!-- UPDATED: Real host photo -->
+            <div class="host-image">
+                <img src="Podcast_Host.JPG" alt="Reflect and Rise podcast host">
+            </div>
             <div class="host-info">
                 <h3>Your Host</h3>
                 <p class="host-title">FOUNDER & HOST</p>
