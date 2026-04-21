@@ -176,6 +176,44 @@
             margin: var(--spacing-md) auto;
         }
 
+        /* ===== SPOTIFY SECTION ===== */
+        .spotify-section {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--content-padding) var(--spacing-lg);
+        }
+
+        .spotify-section h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 400;
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+            color: var(--soft-silver);
+        }
+
+        .spotify-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .spotify-label span {
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            color: var(--muted-gold);
+        }
+
+        .spotify-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #1DB954;
+            display: inline-block;
+        }
+
         /* ===== FILTER SECTION ===== */
         .filter-section {
             max-width: var(--max-width);
@@ -332,6 +370,67 @@
             color: #1DB954;
         }
 
+        /* ===== INSTAGRAM SECTION ===== */
+        .instagram-section {
+            background: var(--deep-slate);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: var(--spacing-xl) var(--content-padding);
+            margin-top: var(--spacing-xl);
+            text-align: center;
+        }
+
+        .instagram-section h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: var(--spacing-sm);
+            color: var(--soft-silver);
+        }
+
+        .instagram-section p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto var(--spacing-lg);
+            line-height: 1.8;
+        }
+
+        .instagram-follow-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 1.5px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+        }
+
+        .instagram-follow-btn:hover {
+            background: var(--accent-gold);
+            color: var(--midnight-navy);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 168, 112, 0.2);
+        }
+
+        .instagram-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .instagram-handle {
+            font-size: 0.9rem;
+            color: var(--muted-gold);
+            margin-top: var(--spacing-sm);
+            letter-spacing: 0.5px;
+        }
+
         /* ===== EMPTY STATE ===== */
         .empty-state {
             text-align: center;
@@ -445,6 +544,25 @@
         </p>
     </header>
 
+    <!-- Spotify Embed Section -->
+    <div class="spotify-section">
+        <div class="spotify-label">
+            <span class="spotify-dot"></span>
+            <span>LISTEN ON SPOTIFY</span>
+        </div>
+        <iframe
+            data-testid="embed-iframe"
+            style="border-radius:12px"
+            src="https://open.spotify.com/embed/show/5QynAHWzcZUJnR5LjfJGyt?utm_source=generator"
+            width="100%"
+            height="352"
+            frameBorder="0"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy">
+        </iframe>
+    </div>
+
     <!-- Filter Section -->
     <div class="filter-section">
         <button class="filter-btn active" onclick="filterEpisodes('all')">All Episodes</button>
@@ -470,10 +588,10 @@
                         the patterns that shape our lives.
                     </p>
                     <div class="episode-links">
-                        <a href="#" class="platform-link youtube">
+                        <a href="https://www.youtube.com/@reflectandrisepodcast" target="_blank" rel="noopener" class="platform-link youtube">
                             <span>▶</span> YouTube
                         </a>
-                        <a href="#" class="platform-link spotify">
+                        <a href="https://open.spotify.com/show/5QynAHWzcZUJnR5LjfJGyt" target="_blank" rel="noopener" class="platform-link spotify">
                             <span>🎵</span> Spotify
                         </a>
                     </div>
@@ -494,10 +612,10 @@
                         with them instead of against them.
                     </p>
                     <div class="episode-links">
-                        <a href="#" class="platform-link youtube">
+                        <a href="https://www.youtube.com/@reflectandrisepodcast" target="_blank" rel="noopener" class="platform-link youtube">
                             <span>▶</span> YouTube
                         </a>
-                        <a href="#" class="platform-link spotify">
+                        <a href="https://open.spotify.com/show/5QynAHWzcZUJnR5LjfJGyt" target="_blank" rel="noopener" class="platform-link spotify">
                             <span>🎵</span> Spotify
                         </a>
                     </div>
@@ -518,10 +636,10 @@
                         connection, and the strength found in openness.
                     </p>
                     <div class="episode-links">
-                        <a href="#" class="platform-link youtube">
+                        <a href="https://www.youtube.com/@reflectandrisepodcast" target="_blank" rel="noopener" class="platform-link youtube">
                             <span>▶</span> YouTube
                         </a>
-                        <a href="#" class="platform-link spotify">
+                        <a href="https://open.spotify.com/show/5QynAHWzcZUJnR5LjfJGyt" target="_blank" rel="noopener" class="platform-link spotify">
                             <span>🎵</span> Spotify
                         </a>
                     </div>
@@ -542,10 +660,10 @@
                         transforming intergenerational trauma.
                     </p>
                     <div class="episode-links">
-                        <a href="#" class="platform-link youtube">
+                        <a href="https://www.youtube.com/@reflectandrisepodcast" target="_blank" rel="noopener" class="platform-link youtube">
                             <span>▶</span> YouTube
                         </a>
-                        <a href="#" class="platform-link spotify">
+                        <a href="https://open.spotify.com/show/5QynAHWzcZUJnR5LjfJGyt" target="_blank" rel="noopener" class="platform-link spotify">
                             <span>🎵</span> Spotify
                         </a>
                     </div>
@@ -566,10 +684,10 @@
                         and create meaningful change in our daily lives.
                     </p>
                     <div class="episode-links">
-                        <a href="#" class="platform-link youtube">
+                        <a href="https://www.youtube.com/@reflectandrisepodcast" target="_blank" rel="noopener" class="platform-link youtube">
                             <span>▶</span> YouTube
                         </a>
-                        <a href="#" class="platform-link spotify">
+                        <a href="https://open.spotify.com/show/5QynAHWzcZUJnR5LjfJGyt" target="_blank" rel="noopener" class="platform-link spotify">
                             <span>🎵</span> Spotify
                         </a>
                     </div>
@@ -590,10 +708,10 @@
                         maintaining connection and compassion.
                     </p>
                     <div class="episode-links">
-                        <a href="#" class="platform-link youtube">
+                        <a href="https://www.youtube.com/@reflectandrisepodcast" target="_blank" rel="noopener" class="platform-link youtube">
                             <span>▶</span> YouTube
                         </a>
-                        <a href="#" class="platform-link spotify">
+                        <a href="https://open.spotify.com/show/5QynAHWzcZUJnR5LjfJGyt" target="_blank" rel="noopener" class="platform-link spotify">
                             <span>🎵</span> Spotify
                         </a>
                     </div>
@@ -602,6 +720,25 @@
 
             <!-- Add more episodes as needed -->
         </div>
+    </div>
+
+    <!-- Instagram / Social Section -->
+    <div class="instagram-section">
+        <div class="divider"></div>
+        <h2>Follow Us on Instagram</h2>
+        <p>
+            Stay connected between episodes — behind-the-scenes moments, episode highlights, 
+            and daily reflections to keep your growth going.
+        </p>
+        <a href="https://www.instagram.com/reflectandrisepodcast/" target="_blank" rel="noopener" class="instagram-follow-btn">
+            <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            FOLLOW @REFLECTANDRISEPODCAST
+        </a>
+        <p class="instagram-handle">@reflectandrisepodcast</p>
     </div>
 
     <script>
